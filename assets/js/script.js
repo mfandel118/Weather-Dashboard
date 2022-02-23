@@ -11,12 +11,11 @@
 // When user searches for a city, the city is added to localStorage ✅ 
 // When user searches for a city, the city is added to list of Previous Searches as a button ✅ 
 
+// When user clicks button for city under Previous Searches, that city's weather & forecast is displayed
+
 // When the user refreshes the page, the Previous Searches are still there ✅
 
 // When user clicks Clear Search History, the localStorage is cleared ✅
-// When user clicks Clear Search History, the list of Previous Searches is cleared of all city buttons
-
-// When user clicks button for city under Previous Searches, that city's weather & forecast is displayed
 
 
 // Declare variables
@@ -24,9 +23,10 @@ var APIkey = "&appid=7dca179715285dbff858d4faf04c2d05";
 // var lat = "";
 // var long = "";
 var now = moment().format('MMMM Do YYYY, h:mm:ss a');
-// console.log(now);
+// console.log(now);✅ 
 
 var userInput = document.querySelector(".user-input");
+
 var searchBtn = document.querySelector(".search-button");
 var searchHistory = document.querySelector(".search-history");
 // Populate search history from localStorage or empty array
@@ -62,27 +62,29 @@ init();
 searchBtn.addEventListener("click",renderWeather)
 function renderWeather() {
     var newCity = userInput.value;
-    // console.log(newCity);
+    // console.log(newCity); ✅ 
 
     // Display current weather info & 5-day forecast for user-inputted city
     // Function with fetch to pull latitude & longitude coordinates and then plug into OneCall API call
     function getCoords() {
-        
-        var geoCodingCall = "http://api.openweathermap.org/geo/1.0/direct?q=" + newCity + APIkey;
-        console.log(geoCodingCall);
-        fetch(geoCodingCall)
+        var geoCodingURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + newCity + APIkey;
+        // console.log(geoCodingURL); ✅ 
+
+        fetch(geoCodingURL)
             .then(function(response) {
                 return response.json();
             })
             .then(function(data) {
-                // console.log(data);
-                var coords = {
+                // console.log(data); ✅ 
+                var coordsObj = {
                 lat: data[0].lat,
-                long: data[0].lon
+                long: data[0].lon,
                 }
-                // console.log(coords);
+                // console.log(coordsObj); ✅ 
+                // console.log(coordsObj.lat); ✅ 
+
                 function getWeather() {
-                    var OneCallURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + coords.lat + "&lon=" + coords.long + APIkey;
+                    var OneCallURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + coordsObj.lat + "&lon=" + coordsObj.long + APIkey;
                     console.log(oneCallURL);
                     
                     fetch(oneCallURL)
