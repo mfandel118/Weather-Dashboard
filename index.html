@@ -34,7 +34,7 @@
         <!-- Left side column contains search form and search history -->
         <section class="col-md-4 p-2 flex-column d-flex align-items-center border-end border-dark">
           <form class="d-flex p-3">
-            <input class="user-input form-control form-control-lg" type="text" placeholder="Enter City Name">
+            <input class="user-input form-control form-control-lg" id="user-input" type="text" placeholder="Enter City Name">
             <button type="button" class="search-button btn btn-outline-dark btn-lg">Search</button>
           </form class=>
           <div class="search-history my-4">
@@ -57,7 +57,6 @@
           <div class="forecast-cards flex-row mt-5">
             <span class="forecast bg-info p-3">Tomorrow</span>
             <!-- ROWS: city & date, current temperature, wind speed, humidity, UV index -->
-              
             <span class="forecast p-3 bg-info">Day After1</span>
             <span class="forecast p-3 bg-info">Day After2</span>
             <span class="forecast p-3 bg-info">Day After3</span>
@@ -73,8 +72,10 @@
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous"
   ></script>
-  <!-- Moment scrip -->
+  <!-- Moment script -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <!-- JQuery script -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
   <!-- My JS script -->
   <script src="assets/js/script.js"></script>   
   </body>
