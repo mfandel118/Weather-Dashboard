@@ -16,7 +16,7 @@
 
 
 // Declare variables
-var APIkey = "7dca179715285dbff858d4faf04c2d05";
+var APIkey = "&appid={7dca179715285dbff858d4faf04c2d05}";
 var lat = "";
 var long = "";
 var now = moment().format('MMMM Do YYYY, h:mm:ss a');
@@ -60,7 +60,8 @@ function renderWeather() {
     // Display current weather info & 5-day forecast for user-inputted city
     // Function with fetch to pull latitude & longitude coordinates to plug into OneCall & 5-day calls
     function getCoords() {
-        fetch("http://api.openweathermap.org/geo/1.0/direct?q={newCity}&appid={APIkey}")
+        var geoCodingCall = "http://api.openweathermap.org/geo/1.0/direct?q={" + newCity + "}" + APIkey;
+        fetch(geoCodingCall)
     }
 
     // Add new city button to search history
