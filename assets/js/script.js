@@ -36,27 +36,44 @@ var uvIndex = document.querySelector(".uv-index");
 var forcast = document.querySelector("forecast");
 
 
+// Function to display Previous Search History on page load
+function init() {
+    for (var i=0; i<searchHistoryList.length; i++) {
+        var btnEl = searchHistoryList[i];
+        var newBtn = document.createElement("button");
+        newBtn.setAttribute("class", "btn btn-dark btn-lg m-3");
+        newBtn.textContent = btnEl;
+        searchHistory.append(newBtn);
+    };
+};
+// Call function to render previous search history
+init();
+
+
 // Event Listener & function to pull weather & add city buttons to list of Previous Searches
 searchBtn.addEventListener("click",displayWeather)
-function displayWeather(event) {
-    var newBtnValue = event.target.parentNode.children[0].value;
+function displayWeather() {
+    var newBtnValue = userInput.value;
     // console.log(newBtnValue);
 
     searchHistoryList.push(newBtnValue);
     localStorage.setItem("city", JSON.stringify(searchHistoryList));
 
-    for (var i=0; i<searchHistoryList.length; i++) {
-        var btnEl = searchHistoryList[i];
+    function addNewBtn() {
         var newBtn = document.createElement("button");
-        newBtn.setAttribute("class", "btn btn-dark btn-lg m-3");
+        newBtn.setAttribute("class", "city-btn btn btn-dark btn-lg m-3");
         newBtn.textContent = newBtnValue;
         searchHistory.append(newBtn);
     };
-    
+    addNewBtn();
 };
+
 
 // Event Listener & function to clear search history
 clearBtn.addEventListener("click",clearHistory)
 function clearHistory() {
-
+    localStorage.clear();
+    // Remove buttons from Previous Searches
+    var cityBtns = document.querySelectorAll(".city-btn");
+    cityBtns.remove();
 };
