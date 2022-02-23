@@ -16,7 +16,7 @@
 
 
 // Declare variables
-var APIkey = "&appid={7dca179715285dbff858d4faf04c2d05}";
+var APIkey = "&appid=7dca179715285dbff858d4faf04c2d05";
 var lat = "";
 var long = "";
 var now = moment().format('MMMM Do YYYY, h:mm:ss a');
@@ -55,15 +55,23 @@ init();
 searchBtn.addEventListener("click",renderWeather)
 function renderWeather() {
     var newCity = userInput.value;
-    // console.log(newBtnValue);
+    // console.log(newCity);
 
     // Display current weather info & 5-day forecast for user-inputted city
     // Function with fetch to pull latitude & longitude coordinates to plug into OneCall & 5-day calls
     function getCoords() {
-        var geoCodingCall = "http://api.openweathermap.org/geo/1.0/direct?q={" + newCity + "}" + APIkey;
+        var geoCodingCall = "http://api.openweathermap.org/geo/1.0/direct?q=" + newCity + APIkey;
         fetch(geoCodingCall)
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+                console.log(data);
+                lat = data.lat;
+                long = data.lon;
+            });
     }
-
+    getCoords();
     // Add new city button to search history
     searchHistoryList.push(newCity);
     localStorage.setItem("city", JSON.stringify(searchHistoryList));
