@@ -7,9 +7,9 @@
 // When user searches for a city, the city is added to localStorage ✅ 
 // When user searches for a city, the city is added to list of Previous Searches as a button ✅ 
 
-// When the user refreshes the page, the Previous Searches are still there
+// When the user refreshes the page, the Previous Searches are still there ✅
 
-// When user clicks Clear Search History, the localStorage is cleared
+// When user clicks Clear Search History, the localStorage is cleared ✅
 // When user clicks Clear Search History, the list of Previous Searches is cleared of all city buttons
 
 // When user clicks button for city under Previous Searches, that city's weather & forecast is displayed
@@ -61,7 +61,8 @@ function displayWeather() {
 
     function addNewBtn() {
         var newBtn = document.createElement("button");
-        newBtn.setAttribute("class", "city-btn btn btn-dark btn-lg m-3");
+        newBtn.setAttribute("class", "btn btn-dark btn-lg m-3");
+        newBtn.setAttribute("id", "city-btn");
         newBtn.textContent = newBtnValue;
         searchHistory.append(newBtn);
     };
@@ -73,7 +74,5 @@ function displayWeather() {
 clearBtn.addEventListener("click",clearHistory)
 function clearHistory() {
     localStorage.clear();
-    // Remove buttons from Previous Searches
-    var cityBtns = document.querySelectorAll(".city-btn");
-    cityBtns.remove();
+
 };
