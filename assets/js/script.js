@@ -22,7 +22,7 @@
 // Declare variables
 var APIkey = "&appid=7dca179715285dbff858d4faf04c2d05";
 
-var now = moment().format('MMMM Do YYYY, h:mm:ss a');
+var now = moment().format('MMMM Do YYYY, h:mm a');
 // console.log(now);
 
 var userInput = document.querySelector(".user-input");
@@ -129,12 +129,30 @@ function renderWeather() {
                             humidityDiv.append(currentHumidity);
 
                             var currentUV = document.createElement("h5");
-                            currentUV.setAttribute("class", "py-2");
-                            currentUV.textContent = "UV Index: " + weatherObj.uvIndex
+                            currentUV.setAttribute("class", "py-2 pe-3");
+                            currentUV.textContent = "UV Index: " + weatherObj.uvIndex;
                             uvDiv.append(currentUV);
 
                             // If statement to show user if UV is favorable, moderate, or severe
-                            
+                            if (weatherObj.uvIndex <= 2) {
+                                var green = document.createElement("p");
+                                green.setAttribute("class", "bg-success text-white pt-1 px-3");
+                                green.textContent = "LOW";
+                                uvDiv.append(green)
+
+                            } else if (weatherObj.uvIndex >= 7) {
+                                var red = document.createElement("p");
+                                red.setAttribute ("class", "bg-danger text-white pt-1 px-3");
+                                red.textContent = "HIGH";
+                                uvDiv.append(red);
+
+                            } else {
+                                var yellow = document.createElement("p");
+                                yellow.setAttribute ("class", "bg-warning pt-1 px-3");
+                                yellow.textContent = "MODERATE";
+                                uvDiv.append(yellow);
+
+                            };
                         };
                         function displayForecast() {
 
