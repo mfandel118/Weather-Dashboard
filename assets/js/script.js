@@ -57,7 +57,7 @@ function init() {
     for (var i=0; i<searchHistoryList.length; i++) {
         var btnEl = searchHistoryList[i];
         var newBtn = document.createElement("button");
-        newBtn.setAttribute("class", "btn btn-dark btn-lg m-3");
+        newBtn.setAttribute("class", "btn btn-dark btn-lg me-5 my-2 w-100");
         newBtn.setAttribute("id", "city-btn");
         newBtn.textContent = btnEl;
         searchHistory.append(newBtn);
