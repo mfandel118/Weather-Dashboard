@@ -73,7 +73,6 @@ init();
 // Display current weather info & 5-day forecast for user-inputted city
 // Event Listener & function to pull weather & add city buttons to list of Previous Searches
 searchBtn.addEventListener("click",renderWeather)
-
 function renderWeather() {
     // Clear previous search from dashboard
     forecastDiv.textContent = "";
@@ -252,10 +251,6 @@ function renderWeather() {
     // Clear input form for additional searches
     userInput.value = "";
 };
-
-
-
-
 
 // Event Listener to display previous searched cities' weather & froecast
 document.addEventListener("click", function (event) {
