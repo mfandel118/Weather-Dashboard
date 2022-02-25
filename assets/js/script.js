@@ -11,7 +11,7 @@
 // When user searches for a city, the city is added to localStorage ✅ 
 // When user searches for a city, the city is added to list of Previous Searches as a button ✅ 
 
-// When user clicks button for city under Previous Searches, that city's weather & forecast is displayed
+// When user clicks button for city under Previous Searches, that city's weather & forecast is displayed ✅
 
 // When the user refreshes the page, the Previous Searches are still there ✅
 
@@ -187,7 +187,7 @@ function renderWeather() {
                             
                                 var displayDay = document.createElement("h3");
                                 displayDay.textContent = getDate(data.daily[i].dt)
-                                displayDay.setAttribute("class", "p-2")
+                                displayDay.setAttribute("class", "px-1 py-2 bg-light d-flex justify-content-center")
                                 dayDiv.append(displayDay);
 
                                 function getDate(date) {
@@ -209,7 +209,7 @@ function renderWeather() {
                                 dayDiv.append(tomEve);
 
                                 var tomWind = document.createElement("p");
-                                tomWind.textContent = "Wind Speed: " + forecastObj1.wind + "MPH";
+                                tomWind.textContent = "Wind Speed: " + forecastObj1.wind + " MPH";
                                 tomWind.setAttribute("class","p-1");
                                 dayDiv.append(tomWind);
 
@@ -236,15 +236,16 @@ function renderWeather() {
     getCoords();
     
     // Add new city button to search history
-    searchHistoryList.push(newCity);
-    localStorage.setItem("city", JSON.stringify(searchHistoryList));
-
     function addNewBtn() {
-        var newBtn = document.createElement("button");
-        newBtn.setAttribute("class", "btn btn-dark btn-lg m-3");
-        newBtn.setAttribute("id", "city-btn")
-        newBtn.textContent = newCity;
-        searchHistory.append(newBtn);
+        if (searchHistoryList.includes(newCity) === false) {
+            var newBtn = document.createElement("button");
+            newBtn.setAttribute("class", "btn btn-dark btn-lg me-5 my-2 w-100");
+            newBtn.setAttribute("id", "city-btn")
+            newBtn.textContent = newCity;
+            searchHistory.append(newBtn);
+            searchHistoryList.push(newCity);
+            localStorage.setItem("city", JSON.stringify(searchHistoryList));
+        };
     };
     addNewBtn();
 
@@ -259,8 +260,8 @@ function renderWeather() {
 // Event Listener to display previous searched cities' weather & froecast
 document.addEventListener("click", function (event) {
     if (event.target.id === "city-btn") {
-        userInput.setAttribute("value", event.target.textContent)
-        renderWeather();
+        userInput.value = event.target.textContent
+        searchBtn.click();
     } else { 
         return;
     }
