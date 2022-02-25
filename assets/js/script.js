@@ -24,9 +24,14 @@ var APIkey = "&appid=7dca179715285dbff858d4faf04c2d05";
 
 var now = moment().format('MMMM Do YYYY, h:mm a');
 // console.log(now);
+var today = new Date();
+// console.log(today);
+// var weekDay = today.getDay();
+// var options = { weekday: 'long'};
+// var day = Intl.DateTimeFormat('en-US', options).format(weekDay);
+// console.log(day);
 
 var userInput = document.querySelector(".user-input");
-
 var searchBtn = document.querySelector(".search-button");
 var searchHistory = document.querySelector(".search-history");
 // Populate search history from localStorage or empty array
@@ -68,6 +73,7 @@ init();
 // Display current weather info & 5-day forecast for user-inputted city
 // Event Listener & function to pull weather & add city buttons to list of Previous Searches
 searchBtn.addEventListener("click",renderWeather)
+
 function renderWeather() {
     // Clear previous search from dashboard
     forecastDiv.textContent = "";
@@ -77,12 +83,12 @@ function renderWeather() {
     humidityDiv.textContent = "";
     uvDiv.textContent = "";
 
-    
     var newCity = userInput.value;
-    // console.log(newCity); 
+    // console.log(newCity);
 
     // Function with fetch to pull latitude & longitude coordinates and then plug into OneCall API call
     function getCoords() {
+        
         var geoCodingURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + newCity + APIkey;
         // console.log(geoCodingURL); 
 
@@ -174,30 +180,43 @@ function renderWeather() {
                                     wind: data.daily[i].wind_speed,
                                     humidity: data.daily[i].humidity,
                                 }
-                                
-                                var tomDiv = document.createElement("div");
-                                tomDiv.setAttribute("class", "bg-info m-3 p-2")
-                                forecastDiv.append(tomDiv);
-                                var tomorrow = document.createElement("h3");
-                                tomorrow.textContent = "Tomorrow";
-                                tomorrow.setAttribute("class", "p-2")
-                                tomDiv.append(tomorrow);
+                            
+                                var dayDiv = document.createElement("div");
+                                dayDiv.setAttribute("class", "bg-info m-3 p-2")
+                                forecastDiv.append(dayDiv);
+                            
+                                var displayDay = document.createElement("h3");
+                                displayDay.textContent = getDate(data.daily[i].dt)
+                                displayDay.setAttribute("class", "p-2")
+                                dayDiv.append(displayDay);
+
+                                function getDate(date) {
+                                    var fullDate = new Date(date * 1000);
+                                    var year = fullDate.getFullYear();
+                                    var month = fullDate.getMonth() + 1;
+                                    var date = fullDate.getDate();
+                                    return month + "/" + date + "/" + year;
+                                  };
+
                                 var tomMorn = document.createElement("p");
                                 tomMorn.textContent = "Morning: " + forecastObj1.tempMorn + " °F";
                                 tomMorn.setAttribute("class","p-1");
-                                tomDiv.append(tomMorn);
+                                dayDiv.append(tomMorn);
+
                                 var tomEve = document.createElement("p");
                                 tomEve.textContent = "Evening: " + forecastObj1.tempEve + " °F";
                                 tomEve.setAttribute("class","p-1");
-                                tomDiv.append(tomEve);
+                                dayDiv.append(tomEve);
+
                                 var tomWind = document.createElement("p");
                                 tomWind.textContent = "Wind Speed: " + forecastObj1.wind + "MPH";
                                 tomWind.setAttribute("class","p-1");
-                                tomDiv.append(tomWind);
+                                dayDiv.append(tomWind);
+
                                 var tomHumid = document.createElement("p");
                                 tomHumid.textContent = "Humidity: " + forecastObj1.humidity + " %";
                                 tomHumid.setAttribute("class","p-1");
-                                tomDiv.append(tomHumid);
+                                dayDiv.append(tomHumid);
 
                                 
                                 
@@ -223,18 +242,37 @@ function renderWeather() {
     function addNewBtn() {
         var newBtn = document.createElement("button");
         newBtn.setAttribute("class", "btn btn-dark btn-lg m-3");
+        newBtn.setAttribute("id", "city-btn")
         newBtn.textContent = newCity;
         searchHistory.append(newBtn);
     };
     addNewBtn();
+
     // Clear input form for additional searches
     userInput.value = "";
 };
 
 
+
+
+
+// Event Listener to display previous searched cities' weather & froecast
+document.addEventListener("click", function (event) {
+    if (event.target.id === "city-btn") {
+        userInput.setAttribute("value", event.target.textContent)
+        renderWeather();
+    } else { 
+        return;
+    }
+});
+
 // Event Listener & function to clear search history
 clearBtn.addEventListener("click",clearHistory)
 function clearHistory() {
     localStorage.clear();
+    searchHistoryList = [];
     searchHistory.textContent = "";
+    var label = document.createElement("h5");
+    label.textContent = "Previous Searches:";
+    searchHistory.append(label);
 };
