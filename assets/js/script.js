@@ -66,7 +66,7 @@ function init() {
 init();
 
 
-// console.log("http://api.openweathermap.org/geo/1.0/direct?q=Denver&appid=7dca179715285dbff858d4faf04c2d05") 
+// console.log("https://api.openweathermap.org/geo/1.0/direct?q=Denver&appid=7dca179715285dbff858d4faf04c2d05") 
 // console.log("https://api.openweathermap.org/data/2.5/onecall?lat=39.7392364&lon=-104.9848623&appid=7dca179715285dbff858d4faf04c2d05") 
 
 
@@ -89,7 +89,7 @@ function renderWeather() {
     // Function with fetch to pull latitude & longitude coordinates and then plug into OneCall API call
     function getCoords() {
         
-        var geoCodingURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + newCity + APIkey;
+        var geoCodingURL = "https://api.openweathermap.org/geo/1.0/direct?q=" + newCity + APIkey;
         // console.log(geoCodingURL); 
 
         fetch(geoCodingURL)
