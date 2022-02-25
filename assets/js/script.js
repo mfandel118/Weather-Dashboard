@@ -58,6 +58,7 @@ function init() {
         var btnEl = searchHistoryList[i];
         var newBtn = document.createElement("button");
         newBtn.setAttribute("class", "btn btn-dark btn-lg m-3");
+        newBtn.setAttribute("id", "city-btn");
         newBtn.textContent = btnEl;
         searchHistory.append(newBtn);
     };
