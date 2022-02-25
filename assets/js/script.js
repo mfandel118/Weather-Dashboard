@@ -2,11 +2,11 @@
 
 // OneCall call uses lat & lon to complete call to retrieve weather info ✅ 
 
-// When the user types in a city & clicks search button, the current weather ✅  & 5-day forecast is displayed
-    // Displays temp ✅ 
-    // Displays wind speed ✅ 
-    // Displays humidity ✅ 
-    // Displays UV index ✅ 
+// When the user types in a city & clicks search button, the current weather ✅  & 5-day forecast is displayed ✅ 
+    // Displays temp ✅ ✅ 
+    // Displays wind speed ✅ ✅ 
+    // Displays humidity ✅ ✅ 
+    // Displays UV index ✅ ✅ 
 
 // When user searches for a city, the city is added to localStorage ✅ 
 // When user searches for a city, the city is added to list of Previous Searches as a button ✅ 
@@ -16,7 +16,7 @@
 // When the user refreshes the page, the Previous Searches are still there ✅
 
 // When user clicks Clear Search History, the localStorage is cleared ✅
-// When user clicks Clear Search History, the previous search buttons are cleared
+// When user clicks Clear Search History, the previous search buttons are cleared ✅
 
 
 // Declare variables
@@ -70,7 +70,13 @@ init();
 searchBtn.addEventListener("click",renderWeather)
 function renderWeather() {
     // Clear previous search from dashboard
-    
+    forecastDiv.textContent = "";
+    cityDiv.textContent = "";
+    tempDiv.textContent = "";
+    windDiv.textContent = "";
+    humidityDiv.textContent = "";
+    uvDiv.textContent = "";
+
     
     var newCity = userInput.value;
     // console.log(newCity); 
@@ -161,12 +167,12 @@ function renderWeather() {
                         };
                         // Display forecast for 5 days
                         function displayForecast() {
-                            // for (i=0; i<data.daily.length; i++) {
+                            for (i=1; i<6; i++) {
                                 var forecastObj1 = {
-                                    tempMorn: data.daily[1].temp.morn,
-                                    tempEve: data.daily[1].temp.eve,
-                                    wind: data.daily[1].wind_speed,
-                                    humidity: data.daily[1].humidity,
+                                    tempMorn: data.daily[i].temp.morn,
+                                    tempEve: data.daily[i].temp.eve,
+                                    wind: data.daily[i].wind_speed,
+                                    humidity: data.daily[i].humidity,
                                 }
                                 
                                 var tomDiv = document.createElement("div");
@@ -185,16 +191,18 @@ function renderWeather() {
                                 tomEve.setAttribute("class","p-1");
                                 tomDiv.append(tomEve);
                                 var tomWind = document.createElement("p");
-                                tomWind.textContent = "Wind Speed: " + forecastObj1.wind + " °F";
+                                tomWind.textContent = "Wind Speed: " + forecastObj1.wind + "MPH";
                                 tomWind.setAttribute("class","p-1");
                                 tomDiv.append(tomWind);
                                 var tomHumid = document.createElement("p");
-                                tomHumid.textContent = "Humidity: " + forecastObj1.humidity + " °F";
+                                tomHumid.textContent = "Humidity: " + forecastObj1.humidity + " %";
                                 tomHumid.setAttribute("class","p-1");
                                 tomDiv.append(tomHumid);
+
+                                
                                 
                             //    console.log(forecastObj1);
-                            // };
+                            };
                             
                         };
                         displayCurrent();
@@ -228,5 +236,5 @@ function renderWeather() {
 clearBtn.addEventListener("click",clearHistory)
 function clearHistory() {
     localStorage.clear();
-
+    searchHistory.textContent = "";
 };
