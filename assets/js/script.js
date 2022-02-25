@@ -1,12 +1,12 @@
 // When user inputs a city, the latitude & longitude coordinates are saved to use in OneCall call ✅ 
 
-// OneCall call uses lat & lon to complete call to retrieve weather info
+// OneCall call uses lat & lon to complete call to retrieve weather info ✅ 
 
-// When the user types in a city & clicks search button, the current weather & 5-day forecast is displayed
-    // Displays temp
-    // Displays wind speed
-    // Displays humidity
-    // Displays UV index
+// When the user types in a city & clicks search button, the current weather ✅  & 5-day forecast is displayed
+    // Displays temp ✅ 
+    // Displays wind speed ✅ 
+    // Displays humidity ✅ 
+    // Displays UV index ✅ 
 
 // When user searches for a city, the city is added to localStorage ✅ 
 // When user searches for a city, the city is added to list of Previous Searches as a button ✅ 
@@ -39,7 +39,7 @@ var windDiv = document.querySelector(".wind-speed");
 var humidityDiv = document.querySelector(".humidity");
 var uvDiv = document.querySelector(".uv-index");
 
-var forcastDiv = document.querySelector("forecast");
+var forecastDiv = document.querySelector(".forecast");
 
 
 // Function to display Previous Search History on page load
@@ -104,7 +104,8 @@ function renderWeather() {
                             humidity: data.current.humidity,
                             uvIndex: data.current.uvi,
                         };
-                        console.log(weatherObj);
+                        // console.log(weatherObj);
+
 
                         // Display current weather on the dashboard
                         function displayCurrent() {
@@ -115,7 +116,7 @@ function renderWeather() {
 
                             var currentTemp = document.createElement("h5");
                             currentTemp.setAttribute("class", "py-2")
-                            currentTemp.textContent = "Temp: " + weatherObj.temp + "°F";
+                            currentTemp.textContent = "Temp: " + weatherObj.temp + " °F";
                             tempDiv.append(currentTemp);
 
                             var currentWind = document.createElement("h5");
@@ -151,14 +152,31 @@ function renderWeather() {
                                 yellow.setAttribute ("class", "bg-warning pt-1 px-3");
                                 yellow.textContent = "MODERATE";
                                 uvDiv.append(yellow);
-
                             };
                         };
+                        // Display forecast for 5 days
                         function displayForecast() {
+                            // for (i=0; i<data.daily.length; i++) {
+                                var forecastObj1 = {
+                                    tempMorn: data.daily[1].temp.morn,
+                                    tempEve: data.daily[1].temp.eve,
+                                    tempNight: data.daily[1].temp.night,
+                                    wind: data.daily[1].wind_speed,
+                                    humidity: data.daily[1].humidity,
+                                }
+                                
 
+                                var tomMorn = document.createElement("p");
+                                tomMorn.textContent = "Morning: " + forecastObj1.tempMorn + " °F";
+                                tomMorn.setAttribute("class","bg-info p-3 row")
+                                forecastDiv.append(tomMorn);
+                            //    console.log(forecastObj1);
+                            // };
+                            
                         };
                         displayCurrent();
                         displayForecast();
+                        
                     });
                 };
                 getWeather();
