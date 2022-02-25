@@ -40,6 +40,11 @@ var humidityDiv = document.querySelector(".humidity");
 var uvDiv = document.querySelector(".uv-index");
 
 var forecastDiv = document.querySelector(".forecast");
+// var forecastDay1 = document.querySelector(".forecast1");
+// var forecastDay2 = document.querySelector(".forecast2");
+// var forecastDay3 = document.querySelector(".forecast3");
+// var forecastDay4 = document.querySelector(".forecast4");
+// var forecastDay5 = document.querySelector(".forecast5");
 
 
 // Function to display Previous Search History on page load
@@ -160,16 +165,34 @@ function renderWeather() {
                                 var forecastObj1 = {
                                     tempMorn: data.daily[1].temp.morn,
                                     tempEve: data.daily[1].temp.eve,
-                                    tempNight: data.daily[1].temp.night,
                                     wind: data.daily[1].wind_speed,
                                     humidity: data.daily[1].humidity,
                                 }
                                 
-
+                                var tomDiv = document.createElement("div");
+                                tomDiv.setAttribute("class", "bg-info m-3 p-2")
+                                forecastDiv.append(tomDiv);
+                                var tomorrow = document.createElement("h3");
+                                tomorrow.textContent = "Tomorrow";
+                                tomorrow.setAttribute("class", "p-2")
+                                tomDiv.append(tomorrow);
                                 var tomMorn = document.createElement("p");
                                 tomMorn.textContent = "Morning: " + forecastObj1.tempMorn + " °F";
-                                tomMorn.setAttribute("class","bg-info p-3 row")
-                                forecastDiv.append(tomMorn);
+                                tomMorn.setAttribute("class","p-1");
+                                tomDiv.append(tomMorn);
+                                var tomEve = document.createElement("p");
+                                tomEve.textContent = "Evening: " + forecastObj1.tempEve + " °F";
+                                tomEve.setAttribute("class","p-1");
+                                tomDiv.append(tomEve);
+                                var tomWind = document.createElement("p");
+                                tomWind.textContent = "Wind Speed: " + forecastObj1.wind + " °F";
+                                tomWind.setAttribute("class","p-1");
+                                tomDiv.append(tomWind);
+                                var tomHumid = document.createElement("p");
+                                tomHumid.textContent = "Humidity: " + forecastObj1.humidity + " °F";
+                                tomHumid.setAttribute("class","p-1");
+                                tomDiv.append(tomHumid);
+                                
                             //    console.log(forecastObj1);
                             // };
                             
